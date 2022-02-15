@@ -6,5 +6,6 @@ build-job:
 deploy-prod:
   stage: deploy
   script:
-    - cd /home/gitlab-runner
+    - cd /home/gitlab-runner/source/webapp
+    - npm install
     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
