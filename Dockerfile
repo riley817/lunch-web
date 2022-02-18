@@ -1,14 +1,12 @@
-FROM node:16-alpine3.11
+
+FROM node:current-slim
 
 WORKDIR /app
 
-COPY package.json ./
-COPY tsconfig.json ./
+COPY . .
 
 RUN npm install
 
-COPY . .
-
-EXPOSE 8000
+EXPOSE 9000
 
 CMD ["npm", "run", "start"]
