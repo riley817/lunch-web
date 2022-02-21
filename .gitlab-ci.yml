@@ -1,11 +1,23 @@
-build-job:
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: repository.devpbteam.com:5000/lunch_webapp:$IMAGE_VERSION
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: package
+  image: docker:latest
+  services:
+    - docker:dind
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
-
-deploy-prod:
-  stage: deploy
-  script:
-    - cd /home/gitlab-runner/source/webapp
-    - npm install
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+    - cd /home/cherry/source/webapp
+    - sudo docker container ls -a
+    - sudo docker build . -t $IMAGE_NAME
+    - sudo docker push $IMAGE_NAME
