@@ -17,7 +17,6 @@ build:
     - docker:dind
   stage: build
   script:
-    - cd /home/cherry/source/webapp
     - sudo docker container ls -a
     - sudo docker build . -t $IMAGE_NAME
     - sudo docker push $IMAGE_NAME
