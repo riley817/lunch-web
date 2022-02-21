@@ -10,13 +10,9 @@ cache:
   paths:
     - node_modules/
 
-build:
-  stage: package
-  image: docker:latest
-  services:
-    - docker:dind
+app-build:
   stage: build
-  script:
-    - sudo docker container ls -a
-    - sudo docker build . -t $IMAGE_NAME
-    - sudo docker push $IMAGE_NAME
+  script: npm install 
+  only:
+    - merge_request
+    - main
