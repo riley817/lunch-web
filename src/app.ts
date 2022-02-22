@@ -11,11 +11,12 @@ app.engine('html', mustachExpress())
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'html');
 
+app.use('/static', express.static(path.join(__dirname, '../dist/static')))
 app.use('/', indexRouter);
 
 app.listen(port, () => {
     console.log(`${__dirname}
 ################################################
     Server listening on port: ${port}
-################################################`);    
+################################################`);
 });
